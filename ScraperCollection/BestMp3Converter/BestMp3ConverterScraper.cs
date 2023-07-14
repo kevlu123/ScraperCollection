@@ -3,7 +3,7 @@ using System.Web;
 
 namespace ScraperCollection.BestMp3Converter;
 
-public static class BestMp3Converter {
+public static class BestMp3ConverterScraper {
     public static async Task<List<Mp3Option>> GetMp3Options(string youtubeUrl, CancellationToken cancellationToken = default) {
         var html = await HttpHelper.RequestHtml(
             "https://www.bestmp3converter.com/models/convertProcess.php",
