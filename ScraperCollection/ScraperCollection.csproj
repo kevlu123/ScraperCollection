@@ -1,0 +1,24 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <PackRelease>true</PackRelease>
+    <Version>1.0.0</Version>
+    
+    <PackageId>kev.ScraperCollection</PackageId>
+    <Authors>Kevin Lu</Authors>
+    <Company>Kevin Lu</Company>
+    <Description>A collection of webscrapers.</Description>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageTags>webscraping http</PackageTags>
+    <PackageReadmeFile>readme.md</PackageReadmeFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="HtmlAgilityPack" Version="1.11.49" />
+    <None Include="../readme.md" Pack="true" PackagePath="/"/>
+  </ItemGroup>
+
+</Project>
