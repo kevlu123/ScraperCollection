@@ -2,4 +2,5 @@
 
 ## Available scrapers
 
-- BestMp3Converter (youtube to mp3)
+- BestMp3Converter
+- Reddit (unstable)
