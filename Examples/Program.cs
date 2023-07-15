@@ -1,5 +1,6 @@
 ﻿using ScraperCollection.BestMp3Converter;
 using ScraperCollection.Reddit;
+using ScraperCollection.Bing;
 
 static async Task BestMp3ConverterExample() {
     Console.WriteLine($"Running {nameof(BestMp3ConverterExample)}...");
@@ -47,6 +48,22 @@ static async Task RedditExample() {
     Console.WriteLine($"Text:    {firstComment.Text}");
 }
 
+static async Task BingExample() {
+    Console.WriteLine($"Running {nameof(BingExample)}...");
+
+    // Get the first result for "the trooper"
+    var results = await BingScraper.Search("the trooper");
+    if (results.Count == 0) {
+        Console.WriteLine("No results yielded.");
+        return;
+    }
+    var firstResult = results.First();
+    Console.WriteLine($"Title:       {firstResult.Title}");
+    Console.WriteLine($"Description: {firstResult.Description}");
+    Console.WriteLine($"Url:         {firstResult.Url}");
+    Console.WriteLine();
+}
+
 static async Task RunExample(Func<Task> example) {
     try {
         await example();
@@ -58,3 +75,4 @@ static async Task RunExample(Func<Task> example) {
 
 await RunExample(BestMp3ConverterExample);
 await RunExample(RedditExample);
+await RunExample(BingExample);
