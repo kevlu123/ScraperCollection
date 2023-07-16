@@ -72,6 +72,7 @@ public static class HttpHelper {
         CancellationToken cancellationToken = default)
     {
         var response = await Request(url, headers, stringContent, contentType, method, cookies, cache, cancellationToken);
+        response.EnsureSuccessStatusCode();
         return await response.Content.ReadAsStringAsync(cancellationToken);
     }
     

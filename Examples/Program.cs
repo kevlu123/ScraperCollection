@@ -73,6 +73,6 @@ static async Task RunExample(Func<Task> example) {
     Console.WriteLine();
 }
 
-await RunExample(BestMp3ConverterExample);
-await RunExample(RedditExample);
 await RunExample(BingExample);
+await RunExample(RedditExample);
+await RunExample(BestMp3ConverterExample);
