@@ -21,12 +21,17 @@ public static class BestMp3ConverterScraper {
             ?.InnerText.Trim()
             ?? "??:??";
 
+        var thumbnailUrl = html.DocumentNode.SelectSingleNode("//img")
+            ?.GetAttributeValue("src", "")
+            ?? "";
+
         return html.DocumentNode.SelectNodes("//option")
             ?.Select(x => new Mp3Option(
                 title,
                 x.Attributes["data-size"].DeEntitizeValue,
                 int.Parse(x.InnerText.Split(';')[^1][..^4]),
                 duration,
+                thumbnailUrl,
                 x.Attributes["data-hash"].DeEntitizeValue
             ))
             .ToList()

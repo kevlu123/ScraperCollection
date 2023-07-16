@@ -10,13 +10,13 @@ public static class ContentType {
 }
 
 public static class HttpHelper {
-    private static readonly HttpClient httpClient = new(new HttpClientHandler {
+    public static HttpClient HttpClient { get; } = new(new HttpClientHandler {
         UseCookies = false,
         AutomaticDecompression = DecompressionMethods.All,
     });
     
     public static async Task<Stream> DownloadFile(string url, CancellationToken cancellationToken = default) {
-        var response = await httpClient.GetAsync(url, HttpCompletionOption.ResponseHeadersRead, cancellationToken);
+        var response = await HttpClient.GetAsync(url, HttpCompletionOption.ResponseHeadersRead, cancellationToken);
         return await response.Content.ReadAsStreamAsync(cancellationToken);
     }
 
@@ -54,7 +54,7 @@ public static class HttpHelper {
             request.Content.Headers.ContentType = MediaTypeHeaderValue.Parse(contentType);
         }
 
-        var response = await httpClient.SendAsync(request,  HttpCompletionOption.ResponseHeadersRead, cancellationToken);
+        var response = await HttpClient.SendAsync(request,  HttpCompletionOption.ResponseHeadersRead, cancellationToken);
         if (cache != null) {
             cache[url] = response;
         }

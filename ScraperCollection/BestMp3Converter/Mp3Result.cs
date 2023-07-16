@@ -5,6 +5,7 @@ public class Mp3Result {
     public string Size => option.Size;
     public int Kbps => option.Kbps;
     public string Duration => option.Duration;
+    public string ThumbnailUrl => option.ThumbnailUrl;
     public Stream Stream { get; }
 
     private readonly Mp3Option option;

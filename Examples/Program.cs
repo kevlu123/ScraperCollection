@@ -1,6 +1,7 @@
 ﻿using ScraperCollection.BestMp3Converter;
 using ScraperCollection.Reddit;
 using ScraperCollection.Bing;
+using ScraperCollection;
 
 static async Task BestMp3ConverterExample() {
     Console.WriteLine($"Running {nameof(BestMp3ConverterExample)}...");
@@ -15,9 +16,16 @@ static async Task BestMp3ConverterExample() {
     var lowestQuality = options.MinBy(x => x.Kbps)!;
     var result = await BestMp3ConverterScraper.DownloadMp3(lowestQuality);
 
-    // Save the mp3 to a file. Prepend "ignore-" to the title so that git ignores it.
+    // Save thumbnail to a file. Prepend "ignore-" to the title so that git ignores it.
+    var thumbnailStream = await HttpHelper.DownloadFile(result.ThumbnailUrl);
+    var thumbnailFilename = $"ignore-{result.Title}.jpg";
+    using var thumbnailFile = File.Create(thumbnailFilename);
+    await thumbnailStream.CopyToAsync(thumbnailFile);
+
+    // Save the mp3 to a file
     var title = $"ignore-{result.Title}.mp3";
-    await result.Stream.CopyToAsync(File.Create(title));
+    using var file = File.Create(title);
+    await result.Stream.CopyToAsync(file);
 
     Console.WriteLine($"Finished downloading {title}.");
 }
